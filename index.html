@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title>
+		Working with the Predix Seed App
+	</title>
+
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+      <header>
+        <h1>Working with the Predix WebApp Starter</h1>      
+          <p class="view">
+          	<a href="https://github.com/abhishekdhaduvai/predix-seed" target="_blank">View the Project on GitHub</a>
+          </p>
+          <p class="view">
+          	<a href="https://www.predix-ui.com/#/home/" target="_blank">Predix UI Home</a>
+          </p>
+          <p class="view">
+          	<a href="https://github.com/PredixDev/predix-webapp-starter" target="_blank">Predix WebApp Starter</a>
+          </p>
+		</header>
+
+      	<section>
+
+	      	<h1 id="predix-seed">Predix Boiler Plate Application</h1>
+			<h2>Predix UI</h2>
+			<p>Predix UI provides a collection of reusable components to help you build your user friendly IoT web application quickly. With Predix’s plug-and-play components, you only have to add them to your page, like any HTML element and it is rendered without you worrying about what’s going on under the hood.</p>
+
+			<h2>What are Predix Components?</h2>
+			<p>Predix UI components, or px-components are Polymer web components that provide a nice user interface without the developer having to worry about the complexity. These components are reusable and can be used together to create powerful, user-friendly web applications. The Predix UI home has great documentation on how to use the components with examples.</p>
+
+			<p><a href="https://www.predix-ui.com/#/home/" target="_blank" title="Predix UI Home">Learn more about Predix UI Components here</a></p>
+
+			<h2>Predix WebApp Starter</h2>			
+			<p>The Predix WebApp Starter has a backend implemented as NodeJS server, with session and proxy configurations, and examples. You can customize this or replace it with another server application, like Nginx. We'll not discuss about that here. Our main focus is on the front-end. We'll stick with the backend of the Webapp Starter.</p>
+
+			<p>The front-end of the Predix WebApp Starter is built using the Polymer library with Inuit CSS and encourages developers to extend it into a full-fledged web application. <a href="https://github.com/PredixDev/predix-webapp-starter">You can learn more about the Predix WebApp Starter here.</a></p>
+
+			<h2>Using the Boiler Plate</h2>
+			<p>This boiler plate application is aimed to give you a starting point to build your application using any front-end javascript framework/library, any CSS framework to design the look and feel you like. You can plug in any Predix UI component in this application because the px-components are framework agnostic. You don't have to build your application using Polymer because the components are built using Polymer.</p>
+
+			<div>
+				For instance, if you want to include a px-card in your application, simply install it and add it your bower.json file by running
+				<div class="highlighter-rouge">
+					<pre class="highlight"><code>bower install px-card --save</code></pre>
+				</div>
+				Import it in your application
+				<div class="highlighter-rouge">
+					<pre class="highlight"><code>&lt;link rel="import" href="bower_components/px-card/px-card.html&gt;</code></pre>
+				</div>
+				And start using it
+				<div class="highlighter-rouge">
+					<pre class="highlight"><code>&lt;px-card header-text="Hello World!">...&lt;/px-card></code></pre>
+				</div>
+			</div>
+
+
+			<h2>Running the application</h2>
+
+			<p>Clone the boiler-plate branch from this repo</p>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>git clone -b boiler-plate https://github.com/abhishekdhaduvai/predix-seed.git</code></pre>
+			</div>
+			<p>You will need node, bower, and gulp to be installed on your machine. If you don't already, you can download and install node from <a href="https://nodejs.org/en/download/">here</a>. Run the following commands after you install node on your machine.</p>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>npm install bower -g</code><br/><code>npm install gulp -g</code></pre>
+			</div>
+			<p>Change directory to predix-seed and run the following commands.</p>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>npm install</code><br/><code>bower install</code></pre>
+			</div>
+			<p>Run the following command to start a local server. Your application will run on <a href="http://localhost:5000">http://localhost:5000</a></p>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>gulp</code></pre>
+			</div>
+
+			<h1>Building an Angular App from the boiler plate</h1>
+
+			<p>AngularJS is a popular front-end framework developed and maintained by Google. Its a great framework built for CRUD applications, which is what most IoT web-applications are. If you're looking to build a sleek, user-friendly Single-page applications, AngularJS is a good fit.</p>
+
+			<h2>Running the application</h2>
+
+			<p>Clone the angularjs branch from this repo.</p>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>git clone -b angularjs https://github.com/abhishekdhaduvai/predix-seed.git</code></pre>
+			</div>
+
+			<p>The steps to launch the app are the same as above. Run the following commands.</p>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>npm install</code><br/><code>bower install</code><br/><code>gulp</code></pre>
+			</div>
+
+			<h3>Pushing the app to the cloud</h3>
+			<p>When you're ready to push your application to CloudFoundry, update the manifest.yml file. Change the name of the application to yours and uncomment and add any services you want to bind to your application. Uncomment the clientId and base64ClientCredential and enter the values from your UAA.</p>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>---
+applications:
+  - name: predix-ui-seed
+    memory: 64M
+    buildpack: nodejs_buildpack
+    command: node server/app.js
+#services:
+ # - <your-name>-secure-uaa-instance
+ # - <your-name>-timeseries-instance
+ # - <your-name>-asset-instance
+env:
+    node_env: cloud
+    uaa_service_label : predix-uaa
+    # Add these values for authentication in the cloud
+    #clientId: {Enter client ID, e.g. app-client-id, and place it here}
+    #base64ClientCredential: dWFhLWNsaWVudC1pZDp1YWEtY2xpZW50LWlkLXNlY3JldA==</code></pre>				
+			</div>
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>gulp dist</code></pre>
+			</div>
+
+			<div class="highlighter-rouge">
+				<pre class="highlight"><code>cf push</code></pre>
+			</div>
+
+			<p>We will try to add more seed applications written using different frameworks, like Angular2, React, etc.</p>
+
+      	</section>
+
+      <footer>        
+        <p>This project is maintained by <a href="https://github.com/abhishekdhaduvai">abhishekdhaduvai</a></p> 
+        <p><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>   
+      </footer>
+    </div>
+  
+  </body>
+</html>
