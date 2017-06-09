@@ -1,0 +1,32 @@
+html{
+    height: 100%;
+}
+body{
+    margin:0px;
+    height: 100%;
+    background: #eee;
+}
+.footer{
+    padding: 1.5em;
+    background: #f8f8f8;
+    color: grey;
+    margin-top: 1em;
+}
+
+google-map{
+    height: 400px;
+}
+
+px-card{
+    margin: 1em;
+}
+
+.navbar-header{
+    width:100%;
+}
+
+px-login{
+    float: right;
+    position: relative;
+    top: 1em;
+}
