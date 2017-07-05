@@ -1,0 +1,39 @@
+html{
+    position: relative;
+    min-height: 100%;
+}
+body{
+    margin:0px;
+    background: #eee;
+}
+.footer{
+    padding: 1.5em;
+    background: #f8f8f8;
+    color: grey;
+    margin-top: 1em;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+google-map{
+    height: 400px;
+}
+
+px-card{
+    margin: 1em;
+}
+
+.navbar-header{
+    width:100%;
+}
+
+px-login{
+    float: right;
+    position: relative;
+    top: 1em;
+}
+#popoverWrapper{
+    top:1em !important;
+    left:2em !important;
+}
