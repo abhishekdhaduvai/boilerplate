@@ -5,7 +5,9 @@
     angular.module('predixApp')
            .controller('dashboardCtrl', dashboardCtrl);
 
-    function dashboardCtrl(){
+    dashboardCtrl.inject = ['assetService']
+
+    function dashboardCtrl(assetService){
         //TODO: Add your functionality
         console.log('In dashboard Ctrl');
     }
