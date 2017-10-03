@@ -1,12 +1,5 @@
-/*******************************************************
-The predix-webapp-starter Express web application includes these features:
-  * routes to mock data files to demonstrate the UI
-  * passport-predix-oauth for authentication, and a sample secure route
-  * a proxy module for calling Predix services such as asset and time series
-*******************************************************/
-var http = require('http'); // needed to integrate with ws package for mock web socket server.
+var http = require('http');
 var express = require('express');
-var jsonServer = require('json-server'); // used for mock api responses
 var path = require('path');
 var cookieParser = require('cookie-parser'); // used for session cookie
 var bodyParser = require('body-parser');
@@ -66,9 +59,9 @@ app.use(session(sessionOptions));
 
 console.log('UAA is configured?', config.isUaaConfigured());
 if (config.isUaaConfigured()) {
+  // Also use passport.session() middleware, to support persistent login sessions (recommended).
 	passport = passportConfig.configurePassportStrategy(config);
   app.use(passport.initialize());
-  // Also use passport.session() middleware, to support persistent login sessions (recommended).
   app.use(passport.session());
 }
 app.use(bodyParser.json());
@@ -78,13 +71,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 	SET UP EXPRESS ROUTES
 *****************************************************************************/
 
-app.get('/docs', require('./routes/docs')(config));
 
 if (!config.isUaaConfigured()) { 
-  // no restrictions
   app.use(express.static(path.join(__dirname, process.env['base-dir'] ? process.env['base-dir'] : '../public')));
 
-  // mock UAA routes
   app.get(['/login', '/logout'], function(req, res) {
     res.redirect('/');
   })
@@ -92,13 +82,11 @@ if (!config.isUaaConfigured()) {
       res.send({user_name: 'Sample User'});
   });
 } else {
-  //login route redirect to predix uaa login page
   app.get('/login',passport.authenticate('predix', {'scope': ''}), function(req, res) {
     // The request will be redirected to Predix for authentication, so this
     // function will not be called.
   });
 
-  // route to fetch user info from UAA for use in the browser
   app.get('/userinfo', userInfo(config.uaaURL), function(req, res) {
     res.send(req.user.details);
   });
@@ -118,15 +106,6 @@ if (!config.isUaaConfigured()) {
   	console.log('Redirecting to secure route...');
   	res.redirect('/');
     });
-
-  // example of calling a custom microservice.
-  // if (windServiceURL && windServiceURL.indexOf('https') === 0) {
-  //   app.get('/windy/*', passport.authenticate('main', { noredirect: true}),
-  //     // if calling a secure microservice, you can use this middleware to add a client token.
-  //     // proxy.addClientTokenMiddleware,
-  //     proxy.customProxyMiddleware('/windy', windServiceURL)
-  //   );
-  // }
 
   if (config.rmdDatasourceURL && config.rmdDatasourceURL.indexOf('https') === 0) {
     app.get('/api/datagrid/*', 
@@ -153,25 +132,6 @@ if (!config.isUaaConfigured()) {
 
 }
 
-/*******************************************************
-SET UP MOCK API ROUTES
-*******************************************************/
-// NOTE: these routes are added after the real API routes. 
-//  So, if you have configured asset, the real asset API will be used, not the mock API.
-// Import route modules
-var mockAssetRoutes = require('./routes/mock-asset.js')();
-var mockTimeSeriesRouter = require('./routes/mock-time-series.js');
-var mockRmdDatasourceRoutes = require('./routes/mock-rmd-datasource.js')();
-// add mock API routes.  (Remove these before deploying to production.)
-app.use(['/mock-api/predix-asset', '/api/predix-asset'], jsonServer.router(mockAssetRoutes));
-app.use(['/mock-api/predix-timeseries', '/api/predix-timeseries'], mockTimeSeriesRouter);
-app.use(['/mock-api/datagrid', '/api/datagrid'], jsonServer.router(mockRmdDatasourceRoutes));
-require('./routes/mock-live-data.js')(httpServer);
-// ***** END MOCK ROUTES *****
-
-// route to return info for path-guide component.
-app.use('/learningpaths', require('./routes/learning-paths')(config));
-
 //logout route
 app.get('/logout', function(req, res) {
 	req.session.destroy();
@@ -191,22 +151,6 @@ app.get('/config', function(req, res) {
   }
   res.send({wsUrl: config.websocketServerURL, appHeader: title});
 });
-
-// Sample route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-//currently not being used as we are using passport-oauth2-middleware to check if
-//token has expired
-/*
-function ensureAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/');
-}
-*/
 
 ////// error handlers //////
 // catch 404 and forward to error handler

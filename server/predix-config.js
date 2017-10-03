@@ -11,6 +11,7 @@ var node_env = process.env.node_env || 'development';
 if(node_env === 'development') {
   // use localConfig file
 	var devConfig = require('./localConfig.json')[node_env];
+	// console.log(devConfig);
 	settings.base64ClientCredential = devConfig.base64ClientCredential;
 	settings.loginBase64ClientCredential = devConfig.loginBase64ClientCredential;
 	settings.uaaURL = devConfig.uaaURL;
@@ -61,6 +62,7 @@ if(node_env === 'development') {
 // This vcap object is used by the proxy module.
 settings.buildVcapObjectFromLocalConfig = function(config) {
 	'use strict';
+	// console.log('local config: ' + JSON.stringify(config));
 	var vcapObj = {};
 	if (config.uaaURL) {
 		vcapObj['predix-uaa'] = [{
@@ -120,6 +122,7 @@ function getValueFromEncodedString(encoded, index) {
 		return '';
 	}
 	var decoded = new Buffer(encoded, 'base64').toString();
+	// console.log('DECODED:  ' + decoded);
 	var values = decoded.split(':');
 	if (values.length !== 2) {
 		throw "base64 encoded client credential is not correct. \n It should be the base64 encoded value of: 'client:secret' \n Set in localConfig.json for local dev, or environment variable in the cloud.";
