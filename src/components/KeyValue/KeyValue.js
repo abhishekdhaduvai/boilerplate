@@ -4,7 +4,6 @@ class KeyValue extends React.Component {
 
   render(){
     const { Key, Value, units, size } = this.props;
-    console.log(this.props);
     return (
       <div style={styles.container}>
         <div>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
-import AppNav from './components/AppNav';
-import KeyValue from './components/KeyValue';
+import AppNav from '../AppNav/AppNav';
+import KeyValue from '../KeyValue/KeyValue';
 
 class App extends Component {
 

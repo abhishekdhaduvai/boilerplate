@@ -23,5 +23,8 @@
     "px-key-value-pair": "^1.2.2",
     "px-card": "^2.0.2",
     "px-data-table": "^5.1.10"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.19"
   }
 }

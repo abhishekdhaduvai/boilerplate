@@ -1,0 +1,16 @@
+---
+applications:
+  - name: react-seed
+    memory: 64M
+    buildpack: nodejs_buildpack
+    command: node server
+#services:
+ # - <your-name>-secure-uaa-instance
+ # - <your-name>-timeseries-instance
+ # - <your-name>-asset-instance
+env:
+    node_env: cloud
+    uaa_service_label : predix-uaa
+    # Add these values for authentication in the cloud
+    #base64ClientCredential: dWFhLWNsaWVudC1pZDp1YWEtY2xpZW50LWlkLXNlY3JldA==
+    #loginBase64ClientCredential: bG9naW5fY2xpZW50X2lkOnNlY3JldA==
