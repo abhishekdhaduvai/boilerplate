@@ -1,5 +1,5 @@
 {
-  "name": "react-seed",
+  "name": "react-starter-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,5 +19,9 @@
     "build": "react-scripts build && rm -rf dist && mkdir dist && cp package.json dist && mv build dist && cp -R server dist/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "engines": {
+    "node": "6.9.5"
+  },
+  "proxy": "http://localhost:5000/"
 }

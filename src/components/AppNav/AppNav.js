@@ -3,6 +3,7 @@ import FontAwesome from 'react-fontawesome';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.min.css';
+import { Link } from 'react-router-dom';
 
 class NavBar extends React.Component{
 
@@ -22,7 +23,6 @@ class NavBar extends React.Component{
 
     getActiveTab = (id) => {
       if(id !== ""){
-        window.location = "/"+id;
         this.setState(state => {
             this.props.items.forEach(item => {
                 item.id === id ? item.active = 'true' : item.active = 'false'
@@ -43,30 +43,34 @@ class NavBar extends React.Component{
                             <div key={item.id}>
                                 {
                                     item.active === 'true' ? 
-                                    <div 
-                                        key={item.id}
-                                        id={item.id}
-                                        style={styles.verticalActiveItem}
-                                        onClick={(e) => getActiveTab(e.target.id)}>
-                                        <FontAwesome 
-                                            onClick={(e) => getActiveTab(e.target.parentElement.id)}
-                                            style={styles.FontAwesome} 
-                                            name = {item.icon} 
-                                            size={'2x'}/>
-                                        {item.label}
-                                    </div> : 
-                                    <div 
-                                        key={item.id}
-                                        id={item.id}
-                                        style={styles.item}
-                                        onClick={(e) => getActiveTab(e.target.id)}>
-                                        <FontAwesome 
-                                            onClick={(e) => getActiveTab(e.target.parentElement.id)}
-                                            style={styles.FontAwesome} 
-                                            name = {item.icon} 
-                                            size={'2x'}/>
-                                        {item.label}
-                                    </div>
+                                    <Link to={item.id}>
+                                        <div 
+                                            key={item.id}
+                                            id={item.id}
+                                            style={styles.verticalActiveItem}
+                                            onClick={(e) => getActiveTab(e.target.id)}>
+                                            <FontAwesome 
+                                                onClick={(e) => getActiveTab(e.target.parentElement.id)}
+                                                style={styles.FontAwesome} 
+                                                name = {item.icon} 
+                                                size={'2x'}/>
+                                            {item.label}
+                                        </div>
+                                    </Link> : 
+                                    <Link to={item.id}>
+                                        <div 
+                                            key={item.id}
+                                            id={item.id}
+                                            style={styles.item}
+                                            onClick={(e) => getActiveTab(e.target.id)}>
+                                            <FontAwesome 
+                                                onClick={(e) => getActiveTab(e.target.parentElement.id)}
+                                                style={styles.FontAwesome} 
+                                                name = {item.icon} 
+                                                size={'2x'}/>
+                                            {item.label}
+                                        </div>
+                                    </Link>
                                 }
                             </div>
                         ))}
@@ -79,30 +83,34 @@ class NavBar extends React.Component{
                             <div key={item.id}>
                                 {
                                     item.active === 'true' ? 
-                                    <div 
-                                        key={item.id}
-                                        id={item.id}
-                                        style={styles.horizontalActiveItem}
-                                        onClick={(e) => getActiveTab(e.target.id)}>
-                                        <FontAwesome 
-                                            onClick={(e) => getActiveTab(e.target.parentElement.id)}
-                                            style={styles.FontAwesome} 
-                                            name = {item.icon} 
-                                            size={'2x'}/>
-                                        {item.label}
-                                    </div> : 
-                                    <div 
-                                        key={item.id}
-                                        id={item.id}
-                                        style={styles.item}
-                                        onClick={(e) => getActiveTab(e.target.id)}>
-                                        <FontAwesome 
-                                            onClick={(e) => getActiveTab(e.target.parentElement.id)}
-                                            style={styles.FontAwesome} 
-                                            name = {item.icon} 
-                                            size={'2x'}/>
-                                        {item.label}
-                                    </div>
+                                    <Link to={item.id}>
+                                        <div 
+                                            key={item.id}
+                                            id={item.id}
+                                            style={styles.horizontalActiveItem}
+                                            onClick={(e) => getActiveTab(e.target.id)}>
+                                            <FontAwesome 
+                                                onClick={(e) => getActiveTab(e.target.parentElement.id)}
+                                                style={styles.FontAwesome} 
+                                                name = {item.icon} 
+                                                size={'2x'}/>
+                                            {item.label}
+                                        </div>
+                                    </Link> : 
+                                    <Link to={item.id}>
+                                        <div 
+                                            key={item.id}
+                                            id={item.id}
+                                            style={styles.item}
+                                            onClick={(e) => getActiveTab(e.target.id)}>
+                                            <FontAwesome 
+                                                onClick={(e) => getActiveTab(e.target.parentElement.id)}
+                                                style={styles.FontAwesome} 
+                                                name = {item.icon} 
+                                                size={'2x'}/>
+                                            {item.label}
+                                        </div>
+                                    </Link>
                                 }
                             </div>
                         ))}

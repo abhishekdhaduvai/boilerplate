@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 import AppNav from '../AppNav/AppNav';
 import KeyValue from '../KeyValue/KeyValue';
+import About from '../About/About';
 
 class App extends Component {
 
-  test = () => {
-    console.log("event!!!")
+  componentDidMount(){
+    fetch("/test")
+    .then(res => {
+      console.log("FETCHED DATA ", res.data);
+    })
+    .catch(err => {
+      console.log("ERROR!!!!", err);
+    })
   }
 
   state = {
@@ -44,6 +51,8 @@ class App extends Component {
     return (
       <div className="App">
         <px-branding-bar />
+        
+        {/* NavBar Component */}
         <AppNav items={navItems}/>
 
         <Route exact path="/" render={() => (
@@ -67,9 +76,9 @@ class App extends Component {
             <div className='flex kpis'>
               <KeyValue Key="Output (Avg)" Value="0.049" units="m/s" size="3" />
               <KeyValue Key="Compression Ratio (Avg)" Value="2.75" units="" size="3" />
-              <KeyValue Key="Reliability" Value="60" uom="%" size="3" />
-              <KeyValue Key="Availability" Value="85.0" uom="%" size="3" />
-              <KeyValue Key="KPI Health" Value="85" uom="%" size="3" />
+              <KeyValue Key="Reliability" Value="60" units="%" size="3" />
+              <KeyValue Key="Availability" Value="85.0" units="%" size="3" />
+              <KeyValue Key="KPI Health" Value="85" units="%" size="3" />
             </div>
 
             <px-card header-text="Asset Status" icon="px-fea:asset">
@@ -84,9 +93,7 @@ class App extends Component {
         )} /> 
 
         <Route exact path="/about" render={() => (
-          <div style={{background: 'white', color: 'black',height:'100%'}}>
-            About here
-          </div>
+          <About />
         )}/>
       </div>
     );
