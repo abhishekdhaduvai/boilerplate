@@ -3,7 +3,7 @@ applications:
   - name: react-starter-app
     memory: 64M
     buildpack: nodejs_buildpack
-    command: node server
+    command: node server/app.js
     path: dist
 #services:
  # - <your-name>-secure-uaa-instance
