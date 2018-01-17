@@ -36,7 +36,7 @@ class NavBar extends React.Component{
         const { items } = this.props;
         const { getActiveTab } = this;
         return (
-            <div>
+            <div style={styles.container}>
                 {this.props.vertical === true && 
                     <div style={styles.vertical}>
                         {items.map(item => (
@@ -122,6 +122,9 @@ class NavBar extends React.Component{
 }
 
 const styles = {
+    container: {
+        flex: 1
+    },
     horizontal: {
         top: 0,
         left: 0,

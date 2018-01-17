@@ -38,7 +38,10 @@ class App extends Component {
         <px-branding-bar />
         
         {/* NavBar Component */}
-        <AppNav items={navItems}/>
+        <div style={{display: 'flex'}}>
+          <AppNav items={navItems}/>
+          <px-login style={styles.login} />
+        </div>
 
         <Switch>
           <Route exact path="/rmd" component={Dashboard} />
@@ -50,6 +53,14 @@ class App extends Component {
 
       </div>
     );
+  }
+}
+
+const styles = {
+  login: {
+    paddingTop: '10px', 
+    paddingRight: '10px', 
+    background:'#0c1419'
   }
 }
 
