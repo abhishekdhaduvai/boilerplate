@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Redirect, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import AppNav from './components/AppNav';
-import KeyValue from './components/KeyValue';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
+import axios from 'axios';
 
 class App extends Component {
 
   componentDidMount(){
-    fetch("/test")
+    axios.get('/userinfo')
     .then(res => {
-      console.log("FETCHED DATA ", res.data);
-    })
-    .catch(err => {
-      console.log("ERROR!!!!", err);
+      console.log(res.data)
     })
   }
 
@@ -43,13 +40,12 @@ class App extends Component {
         {/* NavBar Component */}
         <AppNav items={navItems}/>
 
-        {/* Setting initial path */}
-        <Redirect to="/rmd" />
-
         <Switch>
           <Route exact path="/rmd" component={Dashboard} />
           <Route exact path="/about" component={About} />
-          <Route path="/" component={Dashboard} />
+          <Route path="/" render={() => {
+            return <Redirect to="/rmd" />
+          }}/>
         </Switch>
 
       </div>

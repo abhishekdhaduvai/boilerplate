@@ -1,6 +1,4 @@
 import React from 'react';
-import { Route, Redirect, Link, Switch } from 'react-router-dom';
-import AppNav from './AppNav';
 import KeyValue from './KeyValue';
 
 class Dashboard extends React.Component {
