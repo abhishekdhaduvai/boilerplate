@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import AppNav from './components/AppNav';
 import About from './components/About';
