@@ -7,5 +7,5 @@ cp -R server dist
 cp -R bower_components dist
 cp package.json dist
 cp index.html dist
-echo 'Your project is ready to be deployed on the cloud.'
+echo 'Your project is ready to be deployed to the cloud.'
 echo 'Run cf push to deploy.'
