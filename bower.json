@@ -1,19 +1,7 @@
 {
   "name": "react-seed",
-  "description": "",
-  "main": "",
   "authors": [
     "Abhishek Dhaduvai <abhishek.dhaduvai1@gmail.com>"
-  ],
-  "license": "MIT",
-  "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "src/bower_components",
-    "test",
-    "tests"
   ],
   "dependencies": {
     "px-app-nav": "^2.1.2",
@@ -26,5 +14,6 @@
   },
   "resolutions": {
     "webcomponentsjs": "^v1.0.19"
-  }
+  },
+  "license": "MIT"
 }
