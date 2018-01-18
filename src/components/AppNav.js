@@ -2,7 +2,7 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
-import 'font-awesome/css/font-awesome.min.css';
+// import 'font-awesome/css/font-awesome.css';
 import { Link } from 'react-router-dom';
 
 class NavBar extends React.Component{

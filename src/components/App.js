@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, Redirect, Link } from 'react-router-dom';
-import AppNav from '../AppNav/AppNav';
-import KeyValue from '../KeyValue/KeyValue';
-import About from '../About/About';
+import AppNav from './AppNav';
+import KeyValue from './KeyValue';
+import About from './About';
 
 class App extends Component {
 
   componentDidMount(){
-    fetch("/test")
-    .then(res => {
-      console.log("FETCHED DATA ", res.data);
-    })
-    .catch(err => {
-      console.log("ERROR!!!!", err);
-    })
+
   }
 
   state = {
