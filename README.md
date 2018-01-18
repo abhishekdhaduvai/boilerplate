@@ -1,22 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## Running the application
+You will need node, bower, and gulp to be installed on your machine. If you don't already, you can download and install node from <a href="https://nodejs.org/en/download/">here</a>. Run the following commands after you install node on your machine.
 
-# Running the app locally
-
-You will need node to be installed on your machine. If you don't already, you can download and install node from <a href="https://nodejs.org/en/download/">here</a>.
-
-Since this app uses create-react-app and react-scripts, you will have to run the server, and client seperately to run the app locally.
-
-Start the server using the following command
 ```
-node server/app.js
+npm install bower -g
+npm install gulp -g
 ```
 
-Start your React app using the following command
+Change directory to seed-applications, checkout the react branch, and run the following commands.
+
+```
+git checkout react
+```
+```
+npm install
+bower install
+```
+
+You will need to start the server and the react app seperately.
+
+To start the server, run
 ```
 npm start
 ```
+To start the react app in the dev environment, run the following command in a new tab.
+```
+npm run dev
+```
 
-Browse to <a href="http://localhost:3000">localhost:3000</a> to view your app.
+Your application will run on <a href="http://localhost:5000">http://localhost:5000</a>
+
+# Pushing to the Cloud
 
 # Create a distribution version
 
@@ -25,8 +38,6 @@ Before you push the application to the cloud, you will need to create a distribu
 ```
 npm run build
 ```
-
-# Pushing to the Cloud
 
 When you're ready to push your application to the Predix cloud, update the manifest.yml file. Change the name of the application to yours and uncomment and add any services you want to bind to your application. Uncomment the clientId and base64ClientCredential and enter the values from your UAA.
 
