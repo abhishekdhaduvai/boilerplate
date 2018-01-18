@@ -62,4 +62,6 @@ function reset() {
 module.exports = {
   configurePassportStrategy: configurePassportStrategy,
   reset: reset
+
 };
+

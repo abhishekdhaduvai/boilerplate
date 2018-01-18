@@ -1,9 +1,11 @@
+
 /*******************************************************
 The predix-webapp-starter Express web application includes these features:
   * routes to mock data files to demonstrate the UI
   * passport-predix-oauth for authentication, and a sample secure route
   * a proxy module for calling Predix services such as asset and time series
 *******************************************************/
+
 var http = require('http'); // needed to integrate with ws package for mock web socket server.
 var express = require('express');
 var jsonServer = require('json-server'); // used for mock api responses
@@ -21,6 +23,7 @@ var passportConfig = require('./passport-config');
 var userInfo = require('./routes/user-info');
 var app = express();
 var httpServer = http.createServer(app);
+
 var dataExchange = require('./routes/data-exchange');
 // var fs = require("fs");
 // var assettemplatefile = "sample-data/predix-asset/compressor-2017-clone.json";
