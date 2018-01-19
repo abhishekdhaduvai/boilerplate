@@ -1,4 +1,4 @@
-## Running the application
+### Running the application
 You will need node, bower, and gulp to be installed on your machine. If you don't already, you can download and install node from <a href="https://nodejs.org/en/download/">here</a>. Run the following commands after you install node on your machine.
 
 ```
@@ -30,9 +30,9 @@ npm run dev
 
 Your application will run on <a href="http://localhost:5000">http://localhost:5000</a>
 
-# Pushing to the Cloud
+## Pushing to the Cloud
 
-# Create a distribution version
+### Create a distribution version
 
 Before you push the application to the cloud, you will need to create a distribution version of your app. This will create an optimized build. You will need to run this command every time before you deploy to the Cloud.
 
