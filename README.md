@@ -17,15 +17,9 @@ npm install
 bower install
 ```
 
-You will need to start the server and the react app seperately.
-
-To start the server, run
+To start the application locally, run
 ```
 npm start
-```
-To start the react app in the dev environment, run the following command in a new tab.
-```
-npm run dev
 ```
 
 Your application will run on <a href="http://localhost:5000">http://localhost:5000</a>
