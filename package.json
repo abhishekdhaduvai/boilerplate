@@ -8,8 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/app.js",
-    "dev": "webpack --config webpack.common.js -w",
+    "start": "concurrently 'nodemon server/app.js' 'webpack --config webpack.common.js -w'",
     "build": "./build.sh"
   },
   "author": "Abhishek Dhaduvai",
@@ -36,7 +35,6 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-fontawesome": "^1.6.1",
-    "react-polymer": "^4.1.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
@@ -46,6 +44,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "concurrently": "^3.5.1",
     "css-loader": "^0.28.9",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
@@ -55,4 +54,3 @@
     "webpack-merge": "^4.1.1"
   }
 }
-
