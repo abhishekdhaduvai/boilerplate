@@ -1,3 +1,6 @@
+### React Seed - <a href="https://github.com/abhishekdhaduvai/seed-applications/tree/react">Link</a>
+### AngularJS Seed - <a href="https://github.com/abhishekdhaduvai/seed-applications/tree/angularjs">Link</a>
+
 ## Running the application
 You will need node, bower, and gulp to be installed on your machine. If you don't already, you can download and install node from <a href="https://nodejs.org/en/download/">here</a>. Run the following commands after you install node on your machine.
 
