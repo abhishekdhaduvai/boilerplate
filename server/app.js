@@ -153,7 +153,7 @@ if (!config.isUaaConfigured()) {
   app.use('/', passport.authenticate('main', {
       noredirect: false // Redirect the user to the authentication page
     }),
-    express.static(path.join(__dirname, '../index.html'))
+    express.static(path.join(__dirname, process.env['base-dir'] ? process.env['base-dir'] : '../'))
   );
 
   //Or you can follow this pattern to create secure routes,
