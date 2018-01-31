@@ -1,52 +1,73 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
-import AppNav from './components/AppNav';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import AppNav from './web-components/AppNav';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 import axios from 'axios';
 
 class App extends Component {
 
-  componentDidMount(){
-    axios.get('/userinfo')
-    .then(res => {
-      console.log(res.data)
-    })
+  constructor(props){
+    super(props);
+    this.state = {
+      navItems: [
+        {
+          "label": "Dashboard",
+          "icon": "px-fea:dashboard",
+          "id": "dashboard"
+        },
+        {
+          "label": "About",
+          "icon": "px-fea:alerts",
+          "id": "about"
+        }
+      ],
+      currentRoute: null
+    }
   }
 
-  state = {
-    navItems: [
-    {
-      "label": "Asset Monitoring",
-      "id": "rmd",
-      "icon": "line-chart"
-    }, 
-    {
-      "label": "About",
-      "id": "about",
-      "icon": "book"
-    }]
+  componentWillMount() {
+    if (this.props.location.pathname) {
+      this.syncURLToRoute(this.props.location.pathname);
+    }
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      this.syncURLToRoute(nextProps.location.pathname);
+    }
+  }
+
+  syncURLToRoute(url) {
+    this.setState({currentRoute: [url.slice(1)]})
+  }
+
+  syncRouteToURL = (route) => {
+    const pathname = `/${route.join('/')}`;
+    if (this.props.location.pathname !== pathname) {
+      this.props.history.push(pathname);
+    }
   }
 
   render() {
     const { navItems } = this.state;
-
     return (
       <div className="App">
 
         <px-branding-bar />
         
         {/* NavBar Component */}
-        <div style={{display: 'flex'}}>
-          <AppNav items={navItems}/>
-          <px-login style={styles.login} />
-        </div>
+        <AppNav 
+          items={navItems}
+          selectedRoute={this.state.currentRoute}
+          onSelectedRouteChanged={route => this.syncRouteToURL(route)}>
+        </AppNav>
 
         <Switch>
-          <Route exact path="/rmd" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/about" component={About} />
           <Route path="/" render={() => {
-            return <Redirect to="/rmd" />
+            return <Redirect to="/dashboard" />
           }}/>
         </Switch>
 
@@ -57,10 +78,10 @@ class App extends Component {
 
 const styles = {
   login: {
-    paddingTop: '10px', 
+    paddingTop: '15px', 
     paddingRight: '10px', 
     background:'#0c1419'
-  }
+  },
 }
 
-export default App;
+export default withRouter(App);

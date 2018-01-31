@@ -10,10 +10,6 @@ body {
   background: #24343e;
 }
 
-px-branding-bar {
-  background: #082a39 !important;
-}
-
 .flex {
   display: flex;
 }
