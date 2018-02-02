@@ -3,34 +3,15 @@ import KeyValue from '../web-components/KeyValue';
 
 class Dashboard extends React.Component {
   render(){
-    const dropdownItems = `[{
-      'key': '1',
-      'val': 'No Refresh'
-    }, {
-      'key': '2',
-      'val': 'Every 3 sec'
-    }, {
-      'key': '3',
-      'val': 'Every 15 sec'
-    }, {
-      'key': '4',
-      'val': 'Every 60 sec'
-    }]`
     return (
-      <div>
+      <div style={styles.container}>
+
         {/* Context */}
-        <div className='flex view-heading'>
+        <div style={styles.heading}>
           <KeyValue value='Dashboard' size='gamma'/>
-          <px-dropdown
-            items={dropdownItems}
-            sort-mode='key'
-            button-style='tertiary'
-            display-value='Refresh Frequency'
-            disable-clear>
-          </px-dropdown>
         </div>
 
-        <div className='flex kpis'>
+        <div style={styles.kpi}>
           <KeyValue valueKey='Output (Avg)' value='0.049' uom='m/s' size='gamma' />
           <KeyValue valueKey='Compression Ratio (Avg)' value='2.75' uom='' size='gamma' />
           <KeyValue valueKey='Reliability' value='60' uom='%' size='gamma' />
@@ -44,6 +25,26 @@ class Dashboard extends React.Component {
 
       </div> 
     )
+  }
+}
+
+const styles = {
+  container: {
+    flex: 1
+  },
+  heading: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '1em',
+    paddingTop: '2em',
+    marginLeft: '1em',
+  },
+  kpi: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '1em 1em',
+    paddingRight: '15em',
+    marginLeft: '1em',
   }
 }
 

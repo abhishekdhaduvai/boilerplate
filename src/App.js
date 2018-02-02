@@ -56,12 +56,15 @@ class App extends Component {
 
         <px-branding-bar />
         
-        {/* NavBar Component */}
-        <AppNav 
-          items={navItems}
-          selectedRoute={this.state.currentRoute}
-          onSelectedRouteChanged={route => this.syncRouteToURL(route)}>
-        </AppNav>
+        <div style={styles.nav}>
+          {/* NavBar Component */}
+          <AppNav 
+            items={navItems}
+            selectedRoute={this.state.currentRoute}
+            onSelectedRouteChanged={route => this.syncRouteToURL(route)}>
+          </AppNav>
+          <px-login style={styles.login} />
+        </div>
 
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
@@ -79,9 +82,13 @@ class App extends Component {
 const styles = {
   login: {
     paddingTop: '15px', 
-    paddingRight: '10px', 
+    paddingRight: '1em', 
     background:'#0c1419'
   },
+  nav: {
+    display: 'flex',
+    overflow: 'hidden'
+  }
 }
 
 export default withRouter(App);

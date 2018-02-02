@@ -10,12 +10,10 @@ body {
   background: #24343e;
 }
 
-.flex {
+.App {
   display: flex;
-}
-
-.context {
   flex-direction: column;
+  height: 100%;
 }
 
 px-app-nav, px-app-nav-item, px-app-nav-subitem {
@@ -30,30 +28,8 @@ px-app-nav-item:hover, px-app-nav-subitem:hover, .px-app-nav-item-0[selected] {
   background-color: #09819c;
 }
 
-.view-heading {
-  justify-content: space-between;
-  padding: 1em;
-  padding-top: 2em;
-  margin-left: 1em;
-}
-
 .px-dropdown-0 .dropdown-trigger.px-dropdown {
   background: #425765 !important;
   border: none;
 }
 
-.kpis {
-  justify-content: space-between;
-  padding: 1em 1em;
-  padding-right: 15em;
-  margin-left: 1em;
-}
-
-.value {
-  color: #b6c3cd !important;
-}
-
-px-card {
-  background: #ebeff2;
-  /* color: #768c99; */
-}
