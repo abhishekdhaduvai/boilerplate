@@ -1,14 +1,16 @@
 import React from 'react';
 import KeyValue from '../web-components/KeyValue';
+import DataTable from '../web-components/DataTable';
 
 class Dashboard extends React.Component {
   render(){
+    const tableData = [{"first":"Valentine","last":"Meyer","email":"valentinemeyer@scentric.com"},{"first":"Silva","last":"Alexander","email":"silvaalexander@gmail.com"},{"first":"Hopkins","last":"Wong","email":"hopkinswong@hotmail.com"},{"first": "Joe","last": "Sherman","email": "joejoe@yahoo.com"},{"first": "Jane","last": "Bartlett","email": "jane@scentric.com"}]
     return (
       <div style={styles.container}>
 
         {/* Context */}
         <div style={styles.heading}>
-          <KeyValue value='Dashboard' size='gamma'/>
+          Dashboard
         </div>
 
         <div style={styles.kpiContainer}>
@@ -20,7 +22,7 @@ class Dashboard extends React.Component {
         </div>
 
         <px-card header-text='Asset Status' icon='px-fea:asset'>
-          
+          <DataTable tableData={tableData}></DataTable>
         </px-card>
 
       </div> 
@@ -35,15 +37,19 @@ const styles = {
   heading: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '1em',
-    paddingTop: '2em',
+    padding: '1em 1em 0em 0em',
     marginLeft: '1em',
+    fontSize: '2rem',
+    lineHeight: '1.33333',
+    fontEeight: 'normal',
+    color: '#b6c3cc',
   },
   kpiContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '1em 2em 1em 2em',
-    flexWrap: 'wrap',
+    overflow: 'scroll',
+    whiteSpace: 'nowrap',
   },
   kpi: {
     minWidth: '10em'

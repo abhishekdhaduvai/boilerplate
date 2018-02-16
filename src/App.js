@@ -13,17 +13,17 @@ class App extends Component {
     this.state = {
       navItems: [
         {
-          "label": "Dashboard",
-          "icon": "px-fea:dashboard",
+          "label": "Asset Monitoring",
+          "icon": "px-fea:analytics",
           "id": "dashboard"
         },
         {
           "label": "About",
-          "icon": "px-fea:alerts",
+          "icon": "px-com:message",
           "id": "about"
         }
       ],
-      currentRoute: null
+      currentRoute: null,
     }
   }
 
@@ -52,11 +52,12 @@ class App extends Component {
 
   render() {
     const { navItems } = this.state;
+
     return (
       <div className="App">
 
         <BrandingBar applicationTitle='React Starter Application' />
-        
+
         <div style={styles.nav}>
           {/* NavBar Component */}
           <AppNav 
