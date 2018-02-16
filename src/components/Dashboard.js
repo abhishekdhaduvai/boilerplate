@@ -4,7 +4,55 @@ import DataTable from '../web-components/DataTable';
 
 class Dashboard extends React.Component {
   render(){
-    const tableData = [{"first":"Valentine","last":"Meyer","email":"valentinemeyer@scentric.com"},{"first":"Silva","last":"Alexander","email":"silvaalexander@gmail.com"},{"first":"Hopkins","last":"Wong","email":"hopkinswong@hotmail.com"},{"first": "Joe","last": "Sherman","email": "joejoe@yahoo.com"},{"first": "Jane","last": "Bartlett","email": "jane@scentric.com"}]
+    const tableData = [{
+      "tag": "crank-frame-compressionratio",
+      "delta to threshold": "8.71%",
+      "last meter reading": "2017-03-09 15:59:57 -0800",
+        "current value": "2.739",
+        "units": "",
+        "threshold min": "2.5",
+        "threshold max": "3"
+    }, {
+      "tag": "crank-frame-dischargepressure",
+      "delta to threshold": " 27.10%",
+      "last meter reading": "2017-03-09 15:59:57 -0800",
+      "current value": "16.768",
+      "units": "psi",
+      "threshold min": "0",
+      "threshold max": "23"
+    }, {
+      "tag": "crank-frame-suctionpressure",
+      "delta to threshold": "20.73%",
+      "last meter reading": "2017-03-09 15:59:57 -0800",
+      "current value": "0.044",
+      "units": "psi",
+      "threshold min": "0",
+      "threshold max": "0.21"
+    }, {
+      "tag": "crank-frame-maxpressure",
+      "delta to threshold": " 11.17%",
+      "last meter reading": "2017-03-09 15:59:57 -0800",
+      "current value": "23.095",
+      "units": "psi",
+      "threshold min": "22",
+      "threshold max": "26"
+    }, {
+      "tag": "crank-frame-velocity",
+      "delta to threshold": " 45.87%",
+      "last meter reading": "2017-03-09 15:59:57 -0800",
+      "current value": "0.038",
+      "units": "m/s",
+      "threshold min": "0",
+      "threshold max": "0.07"
+    }, {
+      "tag": "crank-frame-temperature",
+      "delta to threshold": "4.43%",
+      "last meter reading": "2017-03-09 15:59:57 -0800",
+      "current value": "81.458",
+      "units": "F",
+      "threshold min": "65",
+      "threshold max": "80"
+    }]
     return (
       <div style={styles.container}>
 
