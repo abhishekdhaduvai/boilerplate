@@ -21,12 +21,10 @@ class AppNav extends Component {
   }
 
   componentDidMount() {
-    console.log("props ",this.props)
     if (Array.isArray(this.props.items)) {
       this.$appNav.items = this.props.items;
     }
     if (Array.isArray(this.props.selectedRoute)) {
-      console.log("IN IT")
       this.$appNav.selectedRoute = this.props.selectedRoute;
     }
 

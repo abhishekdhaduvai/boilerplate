@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import AppNav from './web-components/AppNav';
+import BrandingBar from './web-components/BrandingBar';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 import axios from 'axios';
@@ -54,7 +55,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <px-branding-bar />
+        <BrandingBar applicationTitle='React Starter Application' />
         
         <div style={styles.nav}>
           {/* NavBar Component */}
@@ -80,6 +81,11 @@ class App extends Component {
 }
 
 const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%'
+  },
   login: {
     paddingTop: '15px', 
     paddingRight: '1em', 

@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
           <KeyValue value='Dashboard' size='gamma'/>
         </div>
 
-        <div style={styles.kpi}>
+        <div style={styles.kpiContainer}>
           <KeyValue valueKey='Output (Avg)' value='0.049' uom='m/s' size='gamma' />
           <KeyValue valueKey='Compression Ratio (Avg)' value='2.75' uom='' size='gamma' />
           <KeyValue valueKey='Reliability' value='60' uom='%' size='gamma' />
@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
         </div>
 
         <px-card header-text='Asset Status' icon='px-fea:asset'>
-          {/* Add Data/Tables here */}
+          
         </px-card>
 
       </div> 
@@ -39,12 +39,14 @@ const styles = {
     paddingTop: '2em',
     marginLeft: '1em',
   },
-  kpi: {
+  kpiContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '1em 1em',
-    paddingRight: '15em',
-    marginLeft: '1em',
+    padding: '1em 2em 1em 2em',
+    flexWrap: 'wrap',
+  },
+  kpi: {
+    minWidth: '10em'
   }
 }
 
