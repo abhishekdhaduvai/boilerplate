@@ -1,11 +1,4 @@
 
-/*******************************************************
-The predix-webapp-starter Express web application includes these features:
-  * routes to mock data files to demonstrate the UI
-  * passport-predix-oauth for authentication, and a sample secure route
-  * a proxy module for calling Predix services such as asset and time series
-*******************************************************/
-
 var http = require('http'); // needed to integrate with ws package for mock web socket server.
 var express = require('express');
 var jsonServer = require('json-server'); // used for mock api responses
@@ -14,23 +7,15 @@ var cookieParser = require('cookie-parser'); // used for session cookie
 var bodyParser = require('body-parser');
 var passport;  // only used if you have configured properties for UAA
 var session = require('express-session');
-var proxy = require('./routes/proxy'); // used when requesting data from real services.
+var proxy = require('./proxy'); // used when requesting data from real services.
 // get config settings from local file or VCAPS env var in the cloud
 var config = require('./predix-config');
 // configure passport for authentication with UAA
 var passportConfig = require('./passport-config');
 // getting user information from UAA
-var userInfo = require('./routes/user-info');
 var app = express();
 var httpServer = http.createServer(app);
 
-var dataExchange = require('./routes/data-exchange');
-// var fs = require("fs");
-// var assettemplatefile = "sample-data/predix-asset/compressor-2017-clone.json";
-
-/**********************************************************************
-       SETTING UP EXRESS SERVER
-***********************************************************************/
 app.set('trust proxy', 1);
 
 // if running locally, we need to set up the proxy from local config file:
@@ -80,11 +65,6 @@ if (config.isUaaConfigured()) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/****************************************************************************
-	SET UP EXPRESS ROUTES
-*****************************************************************************/
-
-app.get('/docs', require('./routes/docs')(config));
 
 if (!config.isUaaConfigured()) { 
   // no restrictions
@@ -95,7 +75,7 @@ if (!config.isUaaConfigured()) {
     res.redirect('/');
   })
   app.get('/userinfo', function(req, res) {
-      res.send({user_name: 'Sample User'});
+    res.send({user_name: 'Sample User'});
   });
 } else {
   //login route redirect to predix uaa login page
@@ -115,7 +95,20 @@ if (!config.isUaaConfigured()) {
   	passport.authenticate('main', {
   		noredirect: true
   	}),
-  	proxy.router);
+    proxy.router);
+
+  /* Example proxy for your microservice. */
+    
+  /* var yourMicroserviceURL = devConfig ? devConfig.yourMicroserviceURL : process.env.yourMicroserviceURL;
+
+  app.use('/microservice-url',
+    passport.authenticate('main', {
+      noredirect: true
+    }),
+    proxy.customProxyMiddleware('/microservice-url', yourMicroserviceURL)
+  );
+
+  */
 
   //callback route redirects to secure route after login
   app.get('/callback', passport.authenticate('predix', {
@@ -124,30 +117,6 @@ if (!config.isUaaConfigured()) {
   	console.log('Redirecting to secure route...');
   	res.redirect('/');
     });
-
-  // example of calling a custom microservice.
-  // if (windServiceURL && windServiceURL.indexOf('https') === 0) {
-  //   app.get('/windy/*', passport.authenticate('main', { noredirect: true}),
-  //     // if calling a secure microservice, you can use this middleware to add a client token.
-  //     // proxy.addClientTokenMiddleware,
-  //     // or you can use this middleware to add a user access token.
-  //     // proxy.addAccessTokenMiddleware,
-  //     proxy.customProxyMiddleware('/windy', windServiceURL)
-  //   );
-  // }
-
-  if (config.rmdDatasourceURL && config.rmdDatasourceURL.indexOf('https') === 0) {
-    app.get('/api/datagrid/*', 
-        proxy.addClientTokenMiddleware, 
-        proxy.customProxyMiddleware('/api/datagrid', config.rmdDatasourceURL, '/services/experience/datasource/datagrid'));
-  }
-
-  if (config.dataExchangeURL && config.dataExchangeURL.indexOf('https') === 0) {
-    app.post('/api/cloneasset', proxy.addClientTokenMiddleware, dataExchange.cloneAsset);
-
-    app.post('/api/updateasset', proxy.addClientTokenMiddleware, 
-        proxy.customProxyMiddleware('/api/updateasset', config.dataExchangeURL, '/services/fdhrouter/fielddatahandler/putfielddata'));
-  }
 
   //Use this route to make the entire app secure.  This forces login for any path in the entire app.
   app.use('/', passport.authenticate('main', {
@@ -168,25 +137,6 @@ if (!config.isUaaConfigured()) {
 
 }
 
-/*******************************************************
-SET UP MOCK API ROUTES
-*******************************************************/
-// NOTE: these routes are added after the real API routes. 
-//  So, if you have configured asset, the real asset API will be used, not the mock API.
-// Import route modules
-var mockAssetRoutes = require('./routes/mock-asset.js')();
-var mockTimeSeriesRouter = require('./routes/mock-time-series.js');
-var mockRmdDatasourceRoutes = require('./routes/mock-rmd-datasource.js')();
-// add mock API routes.  (Remove these before deploying to production.)
-app.use(['/mock-api/predix-asset', '/api/predix-asset'], jsonServer.router(mockAssetRoutes));
-app.use(['/mock-api/predix-timeseries', '/api/predix-timeseries'], mockTimeSeriesRouter);
-app.use(['/mock-api/datagrid', '/api/datagrid'], jsonServer.router(mockRmdDatasourceRoutes));
-require('./routes/mock-live-data.js')(httpServer);
-// ***** END MOCK ROUTES *****
-
-// route to return info for path-guide component.
-app.use('/learningpaths', require('./routes/learning-paths')(config));
-
 //logout route
 app.get('/logout', function(req, res) {
 	req.session.destroy();
@@ -195,33 +145,6 @@ app.get('/logout', function(req, res) {
   res.redirect(config.uaaURL + '/logout?redirect=' + config.appURL);
 });
 
-app.get('/favicon.ico', function (req, res) {
-	res.send('favicon.ico');
-});
-
-app.get('/config', function(req, res) {
-  let title = "Predix WebApp Starter";
-  if (config.isAssetConfigured()) {
-    title = "RMD Reference App";
-  }
-  res.send({wsUrl: config.websocketServerURL, appHeader: title, dataExchangeEnabled: config.isDataExchangeConfigured()});
-});
-
-// Sample route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-//currently not being used as we are using passport-oauth2-middleware to check if
-//token has expired
-/*
-function ensureAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/');
-}
-*/
 
 ////// error handlers //////
 // catch 404 and forward to error handler
