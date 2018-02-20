@@ -94,7 +94,7 @@ const styles = {
   },
   nav: {
     display: 'flex',
-    overflow: 'hidden'
+    // minHeight: '4em'
   }
 }
 

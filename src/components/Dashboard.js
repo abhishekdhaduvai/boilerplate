@@ -6,14 +6,21 @@ class Dashboard extends React.Component {
     return (
       <div style={styles.container}>
 
-        {/* Context */}
-        <div style={styles.heading}>
-          Dashboard
-        </div>
-
         <div style={styles.placeholder}>
           <div>Edit /src/components/Dashboard.js</div>
-          <div>Build your Dashboard</div>
+          <div>Build your Dashboard.</div>
+          <div>Check out the px-sample-app-react repo for examples on how to use px-components with React.</div>
+          <div>
+            <a href="https://github.com/predixdesignsystem/px-sample-app-react">
+              https://github.com/predixdesignsystem/px-sample-app-react
+            </a>
+          </div>
+          <div>Check out the sample app.</div>
+          <div>
+            <a href="https://react-starter-app.run.aws-usw02-pr.ice.predix.io/">
+              https://react-starter-app.run.aws-usw02-pr.ice.predix.io
+            </a>
+          </div>
         </div>
 
       </div> 
@@ -27,23 +34,15 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
   },
-  heading: {
-    display: 'flex',
-    padding: '1em 1em 0em 0em',
-    marginLeft: '1em',
-    fontSize: '2rem',
-    lineHeight: '1.33333',
-    fontEeight: 'normal',
-    color: '#b6c3cc',
-  },
   placeholder: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     flex: 1,
-    color: '#b6c3cd',
+    color: 'black',
     textAlign: 'center',
     paddingBottom: '10em',
+    background: 'white',
   }
 }
 
