@@ -54,7 +54,7 @@ class App extends Component {
     const { navItems } = this.state;
 
     return (
-      <div className="App">
+      <div style={styles.container}>
 
         <BrandingBar applicationTitle='React Starter Application' />
 
@@ -94,7 +94,7 @@ const styles = {
   },
   nav: {
     display: 'flex',
-    overflow: 'hidden'
+    minHeight: '4em',
   }
 }
 
