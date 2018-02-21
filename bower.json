@@ -16,7 +16,7 @@
     "google-map": "^1.2.0",
     "px-vis-xy-chart": "^1.1.1",
     "px-login": "^1.0.8",
-    "angular": "^1.6.4",
+    "angular": "^1.6.9",
     "angular-ui-router": "^1.0.5",
     "bootstrap": "^3.3.7"
   }

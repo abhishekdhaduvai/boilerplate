@@ -2,22 +2,9 @@
   "name": "boiler-plate",
   "version": "1.0.41",
   "private": true,
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "author": {
-    "name": "Predix Adoption",
-    "email": "predix.adoption@ge.com"
-  },
   "scripts": {
-    "start": "node server/app.js",
-    "test": "node_modules/mocha/bin/mocha test/server"
+    "start": "node server/app.js"
   },
-  "keywords": [
-    "predix-ui-seed",
-    "predix-seed",
-    "predix-webapp-starter"
-  ],
   "devDependencies": {
     "chai": "^3.5.0",
     "gulp": "^3.9.0",
